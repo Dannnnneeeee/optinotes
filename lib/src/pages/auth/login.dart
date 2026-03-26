@@ -9,18 +9,28 @@ import 'auth_controller/hidden_pass.dart';
 class LoginForm extends StatelessWidget {
    LoginForm({super.key});
  final obsecureC = Get.put(ObsecureController());
+
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: const Color(0xFF3A8C8A),
       body: Stack(
         children: [
+          Align(
+            alignment: Alignment.topRight,
+              child: Image.asset(
+                "assets/images/atas.png",
+                width: 250,
+                height: 250,
+              ),
+            ),
           Positioned(
             top: 0,
             left: 0,
             right: 0,
             child: SizedBox(
-              height: 400,
+              height: screenHeight * 0.46,
               child: Center(
                 child: Logos(), // ← tutup Row
               ),
@@ -29,7 +39,7 @@ class LoginForm extends StatelessWidget {
 
           // Layer 2: Card putih
           Positioned(
-            top: 350,
+            top: screenHeight * 0.40,
             left: 0,
             right: 0,
             bottom: 0,
