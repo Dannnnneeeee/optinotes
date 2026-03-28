@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 class ButtonLog extends StatelessWidget {
+  final  String labelName ;
+  final VoidCallback? onPressed;
   const ButtonLog({
-    super.key,
+    super.key, required this.labelName,this.onPressed,
   });
 
   @override
@@ -20,9 +22,9 @@ class ButtonLog extends StatelessWidget {
                 borderRadius: BorderRadius.circular(6),
               ),
             ),
-            onPressed: () {},
+            onPressed: onPressed,
             child: Text(
-              "LOGIN",
+              labelName,
               style: TextStyle(color: Colors.white70, letterSpacing: 2),
             ),
           ),

@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 class Logos extends StatelessWidget {
+  final double iconWidth;
+  final double fontSize;
+  final double spacing;
+  final double topPadding;
   const Logos({
-    super.key,
+    super.key, required this.iconWidth, required this.fontSize, required this.spacing, required this.topPadding,
   });
 
   @override
@@ -13,20 +17,20 @@ class Logos extends StatelessWidget {
       children: [
         SvgPicture.asset(
           "assets/icons/camera-lens-ai-fill.svg",
-          width: 88,
+          width: iconWidth,
         ),
-        const SizedBox(width: 4),
+        SizedBox(width: spacing),
         Padding(
-          padding: const EdgeInsets.only(top: 24),
+          padding:  EdgeInsets.only(top: topPadding),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+               Text(
                 "ptiNotes",
                 style: TextStyle(
                   fontFamily: 'Gilroy',
-                  fontSize: 48,
+                  fontSize: fontSize,
                   color: Color(0xffCEDBC0),
                 ),
               ),

@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:optinotes/src/pages/Home/home_pages.dart';
-import 'package:optinotes/src/pages/auth/daftar_akun.dart';
+import 'package:optinotes/src/pages/auth/login.dart';
 
 import '../../../widgets/button.dart';
 import '../../../widgets/form.dart';
 import '../../../widgets/logos.dart';
 import 'auth_controller/hidden_pass.dart';
 
-class LoginForm extends StatelessWidget {
-  LoginForm({super.key});
+class SignUpPage extends StatelessWidget {
+  SignUpPage({super.key});
   final obsecureC = Get.put(ObsecureController());
 
   @override
@@ -20,13 +19,12 @@ class LoginForm extends StatelessWidget {
       backgroundColor: const Color(0xFF3A8C8A),
       body: Stack(
         children: [
-          Positioned(
-            top: 0,
-            right: 0,
+          Align(
+            alignment: Alignment.topRight,
             child: Image.asset(
               "assets/images/atas.png",
-              width: 284,
-              height: 250,
+              width: 240,
+              height: 212,
             ),
           ),
           Positioned(
@@ -34,16 +32,16 @@ class LoginForm extends StatelessWidget {
             left: 0,
             right: 0,
             child: SizedBox(
-              height: screenHeight * 0.46,
+              height: screenHeight * 0.34,
               child: Center(
-                child: Logos(iconWidth: 88, fontSize: 48, spacing: 4, topPadding: 24,), // ← tutup Row
+                child: Logos(iconWidth: 68, fontSize: 38, spacing: 2, topPadding: 12,), // ← tutup Row
               ),
             ),
           ),
 
           // Layer 2: Card putih
           Positioned(
-            top: screenHeight * 0.40,
+            top: screenHeight * 0.27,
             left: 0,
             right: 0,
             bottom: 0,
@@ -67,13 +65,24 @@ class LoginForm extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Center(
-                        child: Text(
-                          "LOGIN",
-                          style: TextStyle(
-                            fontFamily: 'Gilroy',
-                            fontSize: 24,
-                            color: Color(0xffCEDBC0),
-                          ),
+                        child: Column(
+                          children: [
+                            Text(
+                              "Daftar Akun",
+                              style: TextStyle(
+                                fontFamily: 'Gilroy',
+                                fontSize: 24,
+                                color: Color(0xffCEDBC0),
+                              ),
+                            ),Text(
+                              "Buat akun untuk mulai menggunakan aplikasi.",
+                              style: TextStyle(
+                                fontFamily: 'Gilroy',
+                                fontSize: 12,
+                                color: Color(0xffCEDBC0),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                       const SizedBox(height: 16),
@@ -83,38 +92,48 @@ class LoginForm extends StatelessWidget {
                         keyboardType: TextInputType.emailAddress,
                         prefixIcon: Icons.email_rounded,
                       ),
+                      const SizedBox(height: 16), CustomTextField(
+                        labelText: 'Nomor Telfon',
+                        textInputAction: TextInputAction.next,
+                        keyboardType: TextInputType.number,
+                        prefixIcon: Icons.add_call,
+                      ),
                       const SizedBox(height: 16),
                       Obx(() => CustomTextField(
-                          labelText: 'Password',
-                          textInputAction: TextInputAction.done,
-                          keyboardType: TextInputType.visiblePassword,
-                          prefixIcon: Icons.password_rounded,
-                          obscureText: obsecureC.isPasswordHidden.value,
-                          suffixIcon: IconButton(
-                            onPressed: () => obsecureC.togglePassword(),
-                            icon: Icon(
-                              obsecureC.isPasswordHidden.value
-                                  ? Icons.visibility_off
-                                  : Icons.visibility,
-                            ),
+                        labelText: 'Password',
+                        textInputAction: TextInputAction.done,
+                        keyboardType: TextInputType.visiblePassword,
+                        prefixIcon: Icons.password_rounded,
+                        obscureText: obsecureC.isPasswordHidden.value,
+                        suffixIcon: IconButton(
+                          onPressed: () => obsecureC.togglePassword(),
+                          icon: Icon(
+                            obsecureC.isPasswordHidden.value
+                                ? Icons.visibility_off
+                                : Icons.visibility,
                           ),
                         ),
+                      ),
                       ),
                       SizedBox(height: 12),
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: TextButton(
-                          style: TextButton.styleFrom(
-                            padding: EdgeInsets.zero,
-                            minimumSize: Size.zero,
-                            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      Obx(() => CustomTextField(
+                        labelText: 'Konfirmasi Password',
+                        textInputAction: TextInputAction.done,
+                        keyboardType: TextInputType.visiblePassword,
+                        prefixIcon: Icons.password_rounded,
+                        obscureText: obsecureC.isConfirmHidden.value,
+                        suffixIcon: IconButton(
+                          onPressed: () => obsecureC.toggleConfirm(),
+                          icon: Icon(
+                            obsecureC.isConfirmHidden.value
+                                ? Icons.visibility_off
+                                : Icons.visibility,
                           ),
-                          onPressed: () {},
-                          child: Text("Lupa Password?"),
                         ),
                       ),
+                      ),
                       SizedBox(height: 16),
-                      ButtonLog(labelName: 'LOGIN',onPressed: (){Get.to(()=>HomePage());},),
+                      ButtonLog(labelName: 'SignUp',),
                       SizedBox(height: 16),
                       Column(
                         children: [
@@ -155,13 +174,13 @@ class LoginForm extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text("Tidak punya akun? "),
+                              Text("Sudah punya akun? "),
                               GestureDetector(
                                 onTap: () {
-                                 Get.to(()=>SignUpPage());
+                                  Get.to(()=>LoginForm());
                                 },
                                 child: Text(
-                                  "Daftar di sini",
+                                  "Masuk di sini",
                                   style: TextStyle(
                                     color: Colors.blue,
                                     fontWeight: FontWeight.bold,
